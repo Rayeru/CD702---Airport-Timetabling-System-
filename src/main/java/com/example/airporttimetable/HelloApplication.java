@@ -13,13 +13,13 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
 
         // to test database connection
-        //        try {
-        //            DatabaseConnection.getConnection();
-        //            System.out.println("Database Connected Successfully!");
-        //        } catch (Exception e) {
-        //            System.out.println("Database Connection Failed!");
-        //            e.printStackTrace();
-        //        }
+                try {
+                    DatabaseConnection.getConnection();
+                    System.out.println("Database Connected Successfully!");
+                } catch (Exception e) {
+                    System.out.println("Database Connection Failed!");
+                    e.printStackTrace();
+                }
 
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);

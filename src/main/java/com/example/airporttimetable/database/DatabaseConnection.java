@@ -7,11 +7,11 @@ import java.sql.SQLException;
 public class DatabaseConnection {
     // the database name might be different for you
     // so change this "rry12_CD702_AirportTimetable" to match you database name
-    private static final String URL = "jdbc:mysql://localhost:3306/rry12_CD702_AirportTimetable";
+    private static final String URL = "jdbc:mysql://localhost:3306/airport_timetable";
 
     private static final String USER = "root";
 
-    private static final String PASSWORD = "your_password";
+    private static final String PASSWORD = "";
 
     public static Connection getConnection()
             throws SQLException {
