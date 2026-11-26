@@ -1,14 +1,37 @@
 package com.example.airporttimetable.services;
+import com.example.airporttimetable.database.DatabaseConnection;
+import org.mindrot.jbcrypt.BCrypt;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 public class UserService {
-    public string username;
-    public string password;
 
+    // Authenticate a user using their username and password
+    public boolean authenticateUser(String username, String password)
+            throws SQLException {
 
-    public string createUser() {
-        // create the user login here
+        String sql = "SELECT Password FROM user WHERE Username = ?";
 
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
 
-        // navigate to the dashboard to the login page
+            statement.setString(1, username);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+
+                if (resultSet.next()) {
+
+                    String storedPassword = resultSet.getString("password");
+
+                    // Compare the entered password with the stored hash
+                    return BCrypt.checkpw(password, storedPassword);
+                }
+            }
+        }
+
+        // No matching user was found
+        return false;
     }
 }
